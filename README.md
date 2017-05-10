@@ -1,1 +1,3 @@
 # ED_PRAC3_BOSCA_BERNAT_CANELLAS_ALBERT
+# PROG1: Albert Cañellas
+#PROG2: Bernat Bosca
