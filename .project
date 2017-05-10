@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD
 	<name>ED_PRAC3_BOSCA_BERNAT_CANELLAS_ALBERT</name>
-=======
-	<name>ED_PRAC3_BOSCA_BERNAT_CANELLAS_ALBERT_F</name>
->>>>>>> refs/remotes/origin/master
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
-<<<<<<< HEAD
 	</buildSpec>
 	<natures>
-=======
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
->>>>>>> refs/remotes/origin/master
 	</natures>
 </projectDescription>
