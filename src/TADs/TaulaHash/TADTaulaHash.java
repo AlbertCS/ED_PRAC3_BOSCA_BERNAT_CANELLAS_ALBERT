@@ -6,7 +6,7 @@ package TADs.TaulaHash;
  * @author Professors de l'assignatura 16-17
  *
  */
-public interface TADTaulaHashGenerica<K,V> {
+public interface TADTaulaHash<K,V> {
 	/**
 	 * Afegeix un element a la taula de hash
 	 * @param k - clau de l'element a afegir
