@@ -1,10 +1,11 @@
-package TAD;
+package TADs.TaulaHash;
 
 public class TaulaHashEncadenadaIndirecta<K, V> implements TADTaulaHashGenerica<K, V> {
 
 	private NodeHash<K, V>[] taulaLlistes;
 	private int numElem, capacitat;
 	
+	@SuppressWarnings("unchecked")
 	public TaulaHashEncadenadaIndirecta(int capacitat) {
 		taulaLlistes=new NodeHash[capacitat];
 		numElem=0;
@@ -59,6 +60,5 @@ public class TaulaHashEncadenadaIndirecta<K, V> implements TADTaulaHashGenerica<
 		for (int i=0; i<capacitat; i++) {
 			System.out.println(i+": ");
 		}
-		
 	}
 }

@@ -1,4 +1,4 @@
-package TAD;
+package TADs.TaulaHash;
 
 public class NodeHash<K , V> {
 	

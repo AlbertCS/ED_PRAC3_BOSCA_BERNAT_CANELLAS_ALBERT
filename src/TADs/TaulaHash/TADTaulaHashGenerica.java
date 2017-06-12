@@ -1,4 +1,4 @@
-package TAD;
+package TADs.TaulaHash;
 
 /**
  * Interface per a definir una taula de hash generica.
