@@ -1,6 +1,10 @@
 package TADs.Arbre;
 
-public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cloneable {
+import TADs.TAD;
+
+public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
+	
+	@SuppressWarnings("hiding")
 	private class NodeABC<K extends Comparable<K>, V> implements Cloneable {
 		private K k;
 		private V v;
@@ -19,6 +23,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 			return "NodeABC [k=" + k + ", v=" + v + ", fe=" + fe + ", fd=" + fd + "]";
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		protected NodeABC<K,V> clone() {
 			NodeABC<K, V> obj=null;
@@ -46,21 +51,21 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 	}
 	
 	@Override
-	public void inserir(K k, V v) {
+	public void afegir (K k, V v) {
 		if (esBuit()) {
 			arrel=new NodeABC<K,V>(k,v);
 		} else {
 			if (arrel.k.equals(k)) arrel.v=v;
 			else if (arrel.k.compareTo(k)>0) {
 				if (arrel.fe!=null)
-					arrel.fe.inserir(k, v);
+					arrel.fe.afegir(k, v);
 				else {
 					arrel.fe=new ABCdinamic<K,V>(k,v);
 				}
 			}
 			else if (arrel.k.compareTo(k)<0) {
 				if (arrel.fd!=null)
-					arrel.fd.inserir(k, v);
+					arrel.fd.afegir(k, v);
 				else {
 					arrel.fd=new ABCdinamic<K,V>(k,v);
 				}
@@ -68,14 +73,13 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		}
 	}
 
-	@Override
 	public K arrel() {
 		if (arrel!=null) return (arrel.k);
 		return null;
 	}
 
 	@Override
-	public void esborrar(K k) {
+	public V esborrar(K k) {
 		if (arrel!=null) {
 			if (arrel.k.compareTo(k)>0) {
 				if (arrel.fe!=null)
@@ -103,7 +107,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 					if ((arrel.fd!=null) && (arrel.fe!=null)) {
 						// arrel te dos fills
 						K succKlau=arrel.fd.minim();
-						V succValor=buscarElement(succKlau);
+						V succValor=consultar(succKlau);
 						esborrar(succKlau);
 						arrel.k=succKlau;
 						arrel.v=succValor;
@@ -111,6 +115,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 				}
 			}
 		}
+		return null;
 	}
 
 	private ABCdinamic<K,V> esborrar(K k, ABCdinamic<K,V> arbre) {
@@ -127,7 +132,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 				if ((arbre.arrel.fe!=null) && (arbre.arrel.fd!=null)) {
 					// te dos fills
 					K succKlau=arbre.arrel.fd.minim();
-					V succValor=buscarElement(succKlau);
+					V succValor=consultar(succKlau);
 					esborrar(succKlau);
 					arbre.arrel.k=succKlau;
 					arbre.arrel.v=succValor;
@@ -143,7 +148,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		return arbre;
 	}
 	
-	@Override
 	public boolean existeix(K k) {
 		if (arrel==null) return false;
 		else if (arrel.k.equals(k)) return true;
@@ -160,28 +164,26 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 	}
 
 	@Override
-	public V buscarElement(K k) {
+	public V consultar (K k) {
 		if (arrel==null) return null;
 		else if (arrel.k.equals(k)) return arrel.v;
 		else if (arrel.k.compareTo(k)>0) {
 			if (arrel.fe!=null)
-				return(arrel.fe.buscarElement(k));
+				return(arrel.fe.consultar(k));
 			else return null;
 		}
 		else {
 			if (arrel.fd!=null) 
-				return(arrel.fd.buscarElement(k));
+				return(arrel.fd.consultar(k));
 			else return null;
 		}
 	}
 
-	@Override
 	public int numNodes() {
 		LlistaGenericaNoOrd<K> llista=this.inordre();
 		return llista.getNum();
 	}
 
-	@Override
 	public int alcada() {
 		if (arrel==null) return -1;
 		else {
@@ -198,7 +200,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		}
 	}
 
-	@Override
 	public K maxim() {
 		// tenim dos opcions per a calcular el resultat
 		// 1. ultim element del recorregut inordre - cost O(n)
@@ -217,7 +218,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		}*/
 	}
 
-	@Override
 	public K minim() {
 		// tenim dos opcions per a calcular el resultat
 		// 1. primer element del recorregut inordre - cost O(n)
@@ -236,7 +236,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		}
 	}
 
-	@Override
 	public K predecessor(K k) {
 		if (arrel==null) return null;
 		else {
@@ -279,7 +278,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		}
 	}
 
-	@Override
 	public K successor(K k) {
 		if (arrel==null) return null;
 		else {
@@ -322,24 +320,20 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		}
 	}
 
-	@Override
-	public TAD_ABC<K, V> fillEsq() {
+	public ABCdinamic<K, V> fillEsq() {
 		if ((arrel!=null)&&(arrel.fe!=null)) return(arrel.fe.clone());
 		return null;
 	}
 
-	@Override
-	public TAD_ABC<K, V> fillDret() {
+	public ABCdinamic<K, V> fillDret() {
 		if ((arrel!=null)&&(arrel.fd!=null)) return(arrel.fd.clone());
 		return null;
 	}
 
-	@Override
 	public boolean esBuit() {
 		return (arrel==null);
 	}
 
-	@Override
 	public LlistaGenericaNoOrd<K> preordre() {
 		LlistaGenericaNoOrd<K> llista=new LlistaGenericaNoOrd<K>(10);
 		if (arrel!=null) {
@@ -350,7 +344,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		return llista;
 	}
 
-	@Override
 	public LlistaGenericaNoOrd<K> inordre() {
 		LlistaGenericaNoOrd<K> llista=new LlistaGenericaNoOrd<K>(10);
 		if (arrel!=null) {
@@ -361,7 +354,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		return llista;
 	}
 
-	@Override
 	public LlistaGenericaNoOrd<K> postordre() {
 		LlistaGenericaNoOrd<K> llista=new LlistaGenericaNoOrd<K>(10);
 		if (arrel!=null) {
@@ -372,8 +364,8 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
 		return llista;
 	}
 
-	@Override
-	public TAD_ABC<K, V> clone() {
+	@SuppressWarnings("unchecked")
+	public ABCdinamic<K, V> clone() {
 		ABCdinamic<K, V> obj=null;
 		try{
             obj=(ABCdinamic<K, V>)super.clone();
@@ -386,7 +378,6 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD_ABC<K, V>, Cl
         return obj;
 	}
 
-	@Override
 	public String toString() {
 		return "ABCdinamic [arrel=" + arrel + "]";
 	}
