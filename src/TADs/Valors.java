@@ -4,29 +4,34 @@ public class Valors {
 	
 	private int[] planes;
 	private int numPlanes;
-	private int[] repeticions;
-	private int numRepeticions;
+	private int[] linies;
+	private int numLinies;
 	
-	public Valors (int dimPlanes, int dimRepeticions) {
+	public Valors (int dimPlanes, int dimLinies) {
 		planes=new int[dimPlanes];
-		repeticions=new int[dimRepeticions];
+		linies=new int[dimLinies];
 		numPlanes=0;
-		numRepeticions=0;
+		numLinies=0;
 	}
 	
 	public void novaPlana (int valor) {
 		planes[numPlanes]=valor;
 		numPlanes++;
-		numRepeticions=1;
 	}
 	
-	public void novaRepeticio () {
-		repeticions[numPlanes]=numRepeticions;
-		numRepeticions++;
+	public void novaLinia (int valor) {
+		linies[numLinies]=valor;
+		numLinies++;
+	}
+	
+	public int getUltimaPlana() {
+		if(numPlanes!=0) return planes[numPlanes-1];
+		else return -1;
 	}
 
-	public int getUltimaPlana() {
-		return planes[numPlanes-1];
+	public int getUltimaLinia() {
+		if(numLinies!=0) return planes[numLinies-1];
+		else return -1;
 	}
 	
 	public int[] getPlanes() {
@@ -37,12 +42,12 @@ public class Valors {
 		this.planes = planes;
 	}
 
-	public int[] getRepeticions() {
-		return repeticions;
+	public int[] getLinies() {
+		return linies;
 	}
 
-	public void setRepeticions(int[] repeticions) {
-		this.repeticions = repeticions;
+	public void setLinies(int[] linies) {
+		this.linies = linies;
 	}
 
 	public int getNumPlanes() {
@@ -53,11 +58,11 @@ public class Valors {
 		this.numPlanes = numPlanes;
 	}
 
-	public int getNumRepeticions() {
-		return numRepeticions;
+	public int getNumLinies() {
+		return numLinies;
 	}
 
-	public void setNumRepeticions(int numRepeticions) {
-		this.numRepeticions = numRepeticions;
+	public void setNumLinies(int numLinies) {
+		this.numLinies = numLinies;
 	}
 }

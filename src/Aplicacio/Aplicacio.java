@@ -65,46 +65,6 @@ public class Aplicacio {
 		return eD;
 	}
 	
-	/**
-	 * Metode que tracta la lletra, sumant o restant el valor de la clau corresponent
-	 * @param a lletra a tractar
-	 * @param num valor de la clau a aplicar
-	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
-	 * @return la lletra tractada
-	 */
-	public static char tractarLletra(char a, int num, char signe) {
-		char mayus[]={'R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I'};
-		char minus[]={'r','s','t','u','v','w','x','y','z','a','b','c','d','e','f','g','h','i'};
-		int i=0;
-		
-		if(signe=='+') {
-			if((int)(a)<82) a=(char) ((int)(a)+num);	//Lletra mayus sense problemes
-			else if((int)(a)<91) {	//Lletra mayus amb problemes
-				while(a!=mayus[i]) i++;
-				a= mayus[i+num];
-			} 
-			else if (((int)(a)>96)&((int)(a)<114)) a=(char) ((int)(a)+num);	//Lletra minus sense problemes
-			else if((int)(a)<123) {	//Lletra minus amb problemes
-				while(a!=minus[i]) i++;
-				a=minus[i+num];
-			}
-		}
-		else {
-			i=9;
-			if(((int)(a)>64)&((int)(a)<74)) {	//Lletra mayus amb problemes
-				while(a!=mayus[i]) i++;
-				a= mayus[i-num];	
-			}
-			else if((int)(a)<91) a=(char) ((int)(a)-num);	//Lletra mayus sense problemes
-			else if (((int)(a)>96)&((int)(a)<106)) {	//Lletra minus amb problemes
-				while(a!=minus[i]) i++;
-				a=minus[i-num];
-			}
-			else if((int)(a)<123) a=(char) ((int)(a)-num);	//Lletra minus sense problemes
-				
-		}
-		return a;
-	}
 	
 	/**
 	 * Metode que tractara les dades amb el metode triat
@@ -118,9 +78,10 @@ public class Aplicacio {
 			//Variables
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
 			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
-			String frase, paraula, plana="<Plana numero=X>";
+			String frase, paraula, paraula2, plana="<Plana numero=X>";
 			Character a, b='$';
-			Integer numPlana = 1;
+			Integer numPlana=1;
+			int numLinies=1;
 			
 			//Llegim fitxer i carreguem index en el TAD
 			frase=f.readLine();
@@ -129,32 +90,38 @@ public class Aplicacio {
 				plana.replace('X', a);
 				if(plana.equals(frase)){	//Nova Plana
 					numPlana=(int) (a)-48;
+					numLinies=0;
 				}
 				else{
 					StringTokenizer st = new StringTokenizer(frase, " ");
 					while(st.hasMoreTokens()){
 						paraula=st.nextToken();
 						a=frase.charAt(0);
+						paraula2=paraula.substring(1);
 						//paraula repetitiva
-						if(a.equals(b)){
+						if((a.equals(b))&&(eD.consultar(paraula2)==null)){
 							Valors aux = new Valors(50,50);
-							paraula=paraula.substring(1);
-							eD.afegir(paraula, aux);
+							eD.afegir(paraula2, aux);
 							aux.novaPlana(numPlana);
-							aux.novaRepeticio();
+							aux.novaLinia(numLinies);
 						}
 						else{
-							Valors aux = eD.consultar(paraula);
-							if(aux!=null){
-								
+							Valors aux2 = eD.consultar(paraula);
+							//paraula repetitiva que ja existia
+							if(aux2!=null){
+								int ultimaPlana=aux2.getUltimaPlana();
+								int ultimaLinia=aux2.getUltimaLinia();
+								if((ultimaLinia!=numLinies)||(ultimaPlana!=numPlana)){
+									aux2.novaPlana(numPlana);
+									aux2.novaLinia(numLinies);
+								}
 							}
+							//sino no la tractem perquè no és repetitiva o perque es trobarepetida en la mateixa plana i linia
 						}
-					}
-					for(int i=0;i<frase.length();i++){
-						
 					}
 				}
 				frase = f.readLine();
+				numLinies++;
 			}
 			
 			//Creem fitxer Index a partir del TAD
