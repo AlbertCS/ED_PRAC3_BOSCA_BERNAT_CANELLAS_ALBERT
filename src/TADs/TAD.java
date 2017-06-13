@@ -1,4 +1,4 @@
-package TADs.TaulaHash;
+package TADs;
 
 /**
  * Interface per a definir una taula de hash generica.
@@ -6,7 +6,7 @@ package TADs.TaulaHash;
  * @author Professors de l'assignatura 16-17
  *
  */
-public interface TADTaulaHash<K,V> {
+public interface TAD<K,V> {
 	/**
 	 * Afegeix un element a la taula de hash
 	 * @param k - clau de l'element a afegir
@@ -24,15 +24,5 @@ public interface TADTaulaHash<K,V> {
 	 * Consulta un element a la taula de hash
 	 * @param k - clau de l'element a consultar
 	 */	
-	public V consultar(K k);	
-	
-	/**
-	 * Retorna el factor de càrrega actual de la taula de hash
-	 */
-	public float getFactorDeCarrega();
-		
-	/**
-	 * Mostra la taula de hash per consola
-	 */
-	public void mostrarTaula();
+	public V consultar(K k);
 }

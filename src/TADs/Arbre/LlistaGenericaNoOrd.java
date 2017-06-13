@@ -7,15 +7,17 @@ package TADs.Arbre;
  */
 import java.util.*;
 
-public class LlistaGenericaNoOrd<T> implements Iterable<T> {
+public class LlistaGenericaNoOrd<T>{
 	private T[] llista;
 	private int num;
 	
+	@SuppressWarnings("unchecked")
 	public LlistaGenericaNoOrd(int dim) {
 		llista=(T[])new Object[dim];
 		num=0;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) {
 		if (num>=llista.length) {
 			// amplio
@@ -48,14 +50,5 @@ public class LlistaGenericaNoOrd<T> implements Iterable<T> {
 	@Override
 	public String toString() {
 		return "LlistaPunts [llista=" + Arrays.toString(llista) + ", num=" + num + "]";
-	}
-
-	@Override
-	public Iterator<T> iterator() {
-		MeuIterator<T> pI=new MeuIterator<T>(this);
-		return pI;
-	}
-
-	
-	
+	}	
 }
