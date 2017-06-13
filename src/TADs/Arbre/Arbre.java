@@ -2,14 +2,14 @@ package TADs.Arbre;
 
 import TADs.TAD;
 
-public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
+public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 	
 	@SuppressWarnings("hiding")
 	private class NodeABC<K extends Comparable<K>, V> implements Cloneable {
 		private K k;
 		private V v;
-		private ABCdinamic<K, V> fe;
-		private ABCdinamic<K, V> fd;
+		private Arbre<K, V> fe;
+		private Arbre<K, V> fd;
 		
 		public NodeABC(K k, V v) {
 			this.k=k;
@@ -42,11 +42,11 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 	//private int numNodes; el trec, sino cada subarbre te el seu numNodes i no s'actualitza correctament
 	// per a tenir el numNodes, els fe i fd, haurien de ser punters a NodeABC...
 	
-	public ABCdinamic() {
+	public Arbre() {
 		arrel=null;
 	}
 	
-	public ABCdinamic(K k, V v) {
+	public Arbre(K k, V v) {
 		arrel=new NodeABC<K,V>(k,v);
 	}
 	
@@ -60,14 +60,14 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 				if (arrel.fe!=null)
 					arrel.fe.afegir(k, v);
 				else {
-					arrel.fe=new ABCdinamic<K,V>(k,v);
+					arrel.fe=new Arbre<K,V>(k,v);
 				}
 			}
 			else if (arrel.k.compareTo(k)<0) {
 				if (arrel.fd!=null)
 					arrel.fd.afegir(k, v);
 				else {
-					arrel.fd=new ABCdinamic<K,V>(k,v);
+					arrel.fd=new Arbre<K,V>(k,v);
 				}
 			}
 		}
@@ -118,7 +118,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 		return null;
 	}
 
-	private ABCdinamic<K,V> esborrar(K k, ABCdinamic<K,V> arbre) {
+	private Arbre<K,V> esborrar(K k, Arbre<K,V> arbre) {
 		if (arbre!=null) {
 			if (arbre.arrel.k.compareTo(k)>0) {
 				if (arbre.arrel.fe!=null)
@@ -140,8 +140,8 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 				} else {
 					// te un o cap fill
 					if (arbre.arrel.fe!=null) {
-						arbre=(ABCdinamic<K, V>) arbre.fillEsq();
-					} else arbre=(ABCdinamic<K, V>) arbre.fillDret();
+						arbre=(Arbre<K, V>) arbre.fillEsq();
+					} else arbre=(Arbre<K, V>) arbre.fillDret();
 				}
 			}
 		}
@@ -227,9 +227,9 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 		if (arrel==null) return null;
 		else {
 			if (arrel.fe!=null) {
-				ABCdinamic<K, V> aux=arrel.fe;
+				Arbre<K, V> aux=arrel.fe;
 				while (aux.fillEsq()!=null) {
-					aux=(ABCdinamic<K, V>) aux.fillEsq();
+					aux=(Arbre<K, V>) aux.fillEsq();
 				}
 				return (aux.arrel.k);
 			} else return arrel.k;
@@ -246,7 +246,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 		  }
 		  else {
 			  // anirem buscant l'element en alguna de les branques de l'arbre
-			  ABCdinamic<K, V> copia;
+			  Arbre<K, V> copia;
 			  NodeABC<K, V> avantpassat=null;
 			  boolean trobat=false;
 			  if (arrel.k.compareTo(k)<0) {
@@ -288,7 +288,7 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 		  }
 		  else {
 			  // anirem buscant l'element en alguna de les branques de l'arbre
-			  ABCdinamic<K, V> copia;
+			  Arbre<K, V> copia;
 			  NodeABC<K, V> avantpassat=null;
 			  boolean trobat=false;
 			  if (arrel.k.compareTo(k)<0) {
@@ -320,12 +320,12 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 		}
 	}
 
-	public ABCdinamic<K, V> fillEsq() {
+	public Arbre<K, V> fillEsq() {
 		if ((arrel!=null)&&(arrel.fe!=null)) return(arrel.fe.clone());
 		return null;
 	}
 
-	public ABCdinamic<K, V> fillDret() {
+	public Arbre<K, V> fillDret() {
 		if ((arrel!=null)&&(arrel.fd!=null)) return(arrel.fd.clone());
 		return null;
 	}
@@ -365,16 +365,16 @@ public class ABCdinamic<K extends Comparable<K>, V> implements TAD<K, V>, Clonea
 	}
 
 	@SuppressWarnings("unchecked")
-	public ABCdinamic<K, V> clone() {
-		ABCdinamic<K, V> obj=null;
+	public Arbre<K, V> clone() {
+		Arbre<K, V> obj=null;
 		try{
-            obj=(ABCdinamic<K, V>)super.clone();
+            obj=(Arbre<K, V>)super.clone();
         }catch(CloneNotSupportedException ex){
             System.out.println("No es pot duplicar");
         }
 		obj.arrel=obj.arrel.clone();
-		if (obj.fillEsq()!=null) obj.arrel.fe = (ABCdinamic<K,V>)obj.fillEsq().clone();
-		if (obj.fillDret()!=null) obj.arrel.fd = (ABCdinamic<K,V>)obj.fillDret().clone();
+		if (obj.fillEsq()!=null) obj.arrel.fe = (Arbre<K,V>)obj.fillEsq().clone();
+		if (obj.fillDret()!=null) obj.arrel.fd = (Arbre<K,V>)obj.fillDret().clone();
         return obj;
 	}
 

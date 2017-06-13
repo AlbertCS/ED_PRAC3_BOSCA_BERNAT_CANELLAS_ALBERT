@@ -3,6 +3,10 @@ package Aplicacio;
 import java.io.*;
 import java.util.*;
 
+import TADs.*;
+import TADs.TaulaHash.*;
+import TADs.Arbre.*;
+
 /**
  * Class per testejar el programa
  * @author Albert Cañellas Sole
@@ -23,7 +27,7 @@ public class Aplicacio {
 		String op;
 		int opcio=0;
 		
-		System.out.println("Indica tipus de cua a utilitzar:\n\t1. Vector\n\t2. Circular\n\t3. Dinàmica\n\t4. JavaCollection");
+		System.out.println("Indica tipus d'estructura de dades vols utilitzar:\n\t1. Taula Hash\n\t2. Arbre");
 		op=teclat.nextLine();
 		if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op);
 		
@@ -33,12 +37,8 @@ public class Aplicacio {
 					opcioOk=false; break;
 				case 2: 
 					opcioOk=false; break;
-				case 3: 
-					opcioOk=false; break;
-				case 4: 
-					opcioOk=false; break;
 				default:
-					System.out.println("Valor incorrecte. Indica tipus de cua a utilitzar:\n\t1. Vector\n\t2. Circular\n\t3. Dinàmica\n\t4. JavaCollection");
+					System.out.println("Valor incorrecte. Indica tipus d'estructura de dades vols utilitzar:\n\t1. Taula Hash\n\t2. Arbre");
 					op=teclat.nextLine();
 					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
 			}
@@ -54,25 +54,16 @@ public class Aplicacio {
 	 * @param clau	la clau amb la que tractar el missatge
 	 * @return retorna la cua corresponent
 	 */
-	/*public static TADDades<Integer> implementacio(int opcio, int mida, TADDades<Integer> cua, String clau) {
+	public static TAD<String, Valors> implementacio(int opcio, TAD<String, Valors> eD) {
 		switch(opcio){
 			case 1:
-				cua=new CuaVector<Integer>(mida); break;
+				eD=new TaulaHash<String, Valors>(1000); break;
 			case 2:
-				cua=new CuaCircular<Integer>(mida); break;
-			case 3:
-				cua=new CuaDinamic<Integer>(); break;
-			case 4:
-				cua=new CuaJava<Integer>(); break;
+				eD=new Arbre<String, Valors>(); break;
 			default: break;
 		}
-		try{
-			for(int i=0;i<mida;i++)	cua.encuar(new Integer (clau.charAt(i)-48));
-		} catch (CuaPlena e){
-			System.out.println("Aquesta circunstancia no deuria de passar mai.");
-		}
-		return cua;
-	}*/
+		return eD;
+	}
 	
 	/**
 	 * Metode que tracta la lletra, sumant o restant el valor de la clau corresponent
@@ -121,75 +112,60 @@ public class Aplicacio {
 	 * @param cuaClau cua que conte la clau
 	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
 	 */
-	/*public static void tractarDades(String nomFitxer, TADDades<Integer> cuaClau, char signe) {
+	public static void tractarDades(String nomFitxer, TAD<String, Valors> eD) {
 		
 		try {
 			//Variables
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
-			String frase, nomGuardar;
-			Character a;
-			Integer num;
-
-			//Xifrar
-			if (signe=='+') nomGuardar=(nomFitxer+"_vX.txt");
-			//Desxifrar
-			else nomGuardar=(nomFitxer+"_vD.txt");
-			BufferedWriter g=new BufferedWriter(new FileWriter(nomGuardar));
+			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
+			String frase, paraula, plana="<Plana numero=X>";
+			Character a, b='$';
+			Integer numPlana = 1;
 			
+			//Llegim fitxer i carreguem index en el TAD
 			frase=f.readLine();
 			while(frase!=null){ 
-				for(int i=0;i<frase.length();i++){
-					a=frase.charAt(i);
-					if(Character.isLetter(a)){
-						try{
-							num=cuaClau.desencuar();
-							a = tractarLletra(a.charValue(), num.intValue(), signe);
-							g.write(String.valueOf(a));
-							cuaClau.encuar(num);
-						} catch(CuaBuida|CuaPlena e){
-							System.out.println("Aquesta circunstancia no deuria de passar mai.");
+				a=frase.charAt(14);
+				plana.replace('X', a);
+				if(plana.equals(frase)){	//Nova Plana
+					numPlana=(int) (a)-48;
+				}
+				else{
+					StringTokenizer st = new StringTokenizer(frase, " ");
+					while(st.hasMoreTokens()){
+						paraula=st.nextToken();
+						a=frase.charAt(0);
+						//paraula repetitiva
+						if(a.equals(b)){
+							Valors aux = new Valors(50,50);
+							paraula=paraula.substring(1);
+							eD.afegir(paraula, aux);
+							aux.novaPlana(numPlana);
+							aux.novaRepeticio();
+						}
+						else{
+							Valors aux = eD.consultar(paraula);
+							if(aux!=null){
+								
+							}
 						}
 					}
-					else g.write(String.valueOf(a));
+					for(int i=0;i<frase.length();i++){
+						
+					}
 				}
-			frase = f.readLine();
-			if(frase!=null) g.newLine();
+				frase = f.readLine();
 			}
+			
+			//Creem fitxer Index a partir del TAD
+			if(frase!=null) g.newLine();
+			else g.write(String.valueOf('a'));
+			
 			g.close();
 			f.close();
 		}catch (IOException e) {
 			System.err.println("Error de tipus IOException.");
 		}
-	}*/
-	
-	/**
-	 * Metode que pregunta si es vol xifrar(+) o desxifrar(-) i guarda el signe dependent de l'opcio triada
-	 * @param teclat variable de tipus Scanner
-	 * @return retorna el signe depenent de l'opcio triada
-	 */
-	public static char xifrarDesxifrar(Scanner teclat) {
-		boolean opcioOk=false;
-		int opcio=0;
-		char signe='0';
-		String op;
-		
-		System.out.println("Indica si vols xifrar o desxifrar:\n\t1. Xifrar\n\t2. Desxifrar");
-		op=teclat.nextLine();
-		if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op);
-		
-		while(!opcioOk){
-			switch(opcio){
-				//Xifrar
-				case 1: signe='+'; opcioOk=true; break;
-				//Desxifrar
-				case 2: signe='-'; opcioOk=true; break;
-				default:
-					System.out.println("Valor incorrecte. Indica si vols xifrar o desxifrar:\n\t1. Xifrar\n\t2. Desxifrar");
-					op=teclat.nextLine();
-					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
-			}
-		}
-		return signe;
 	}
 	
 	/**
@@ -201,7 +177,7 @@ public class Aplicacio {
 		String nomFitxer;
 		boolean isOk=true;
 		
-		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'text'.");
+		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'Text1'.");
 		nomFitxer=teclat.nextLine();
 		File nameFile = new File(nomFitxer+".txt");
 		while(isOk){
@@ -247,10 +223,9 @@ public class Aplicacio {
 	 */
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
-		//TADDades<Integer> cuaClau=null;
-		String nomFitxer, clau;
+		TAD<String, Valors> eD=null;
+		String nomFitxer;
 		int opcio;
-		char signe;
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
@@ -258,17 +233,11 @@ public class Aplicacio {
 		
 		//Nom fitxer
 		nomFitxer=nomCorrecte(teclat);
-
-		//Clau
-		clau=clauCorrecta(teclat);
-		
-		//Xifrar/Desxifrar
-		signe=xifrarDesxifrar(teclat);
 		
 		//Operacions
 		tempsi=System.nanoTime();
-		//cuaClau=implementacio(opcio, clau.length(), cuaClau, clau);
-		//tractarDades(nomFitxer, cuaClau, signe);
+		eD=implementacio(opcio, eD);
+		tractarDades(nomFitxer, eD);
 		tempsf=System.nanoTime();
 		
 		System.out.println("Les Dades s'han tractat correctament.\n");

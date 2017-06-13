@@ -34,8 +34,18 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 
 	@Override
 	public V esborrar(K k) {
-		// TODO Auto-generated method stub
-		return null;
+		int clauHash=k.hashCode()%capacitat;
+		if(taulaLlistes[clauHash]==null) {
+			return null;
+		}
+		else{
+			NodeHash<K, V> aux=taulaLlistes[clauHash];
+			while((aux.getSeguent()!=null) && (aux.getKey()!=k)) aux=aux.getSeguent();
+			if((aux.getSeguent()==null) && (aux.getKey()!=k)){
+				return null;
+			}
+			else return (aux.getValue());
+		}
 	}
 
 	@Override
