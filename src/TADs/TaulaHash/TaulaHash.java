@@ -1,8 +1,6 @@
 package TADs.TaulaHash;
 
-import TADs.TAD;
-
-public class TaulaHash<K, V> implements TAD<K, V> {
+public class TaulaHash<K, V> implements TADTaulaHash<K, V> {
 
 	private NodeHash<K, V>[] taulaLlistes;
 	private int numElem, capacitat;
@@ -49,6 +47,18 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 			while((aux.getSeguent()!=null) && (aux.getKey()!=k)) aux=aux.getSeguent();
 			if((aux.getSeguent()==null) && (aux.getKey()!=k)) return null;
 			else return aux.getValue();
+		}
+	}
+
+	@Override
+	public float getFactorDeCarrega() {
+		return ((float) numElem/capacitat);
+	}
+
+	@Override
+	public void mostrarTaula() {
+		for (int i=0; i<capacitat; i++) {
+			System.out.println(i+": ");
 		}
 	}
 }
