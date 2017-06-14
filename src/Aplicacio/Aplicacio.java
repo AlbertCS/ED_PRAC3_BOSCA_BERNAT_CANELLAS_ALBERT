@@ -57,7 +57,7 @@ public class Aplicacio {
 	public static TAD<String, Valors> implementacio(int opcio, TAD<String, Valors> eD) {
 		switch(opcio){
 			case 1:
-				eD=new TaulaHash<String, Valors>(1000); break;
+				eD=new TaulaHash<String, Valors>(100); break;
 			case 2:
 				eD=new Arbre<String, Valors>(); break;
 			default: break;
