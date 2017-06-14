@@ -119,10 +119,11 @@ public class Aplicacio {
 						paraula=paraula.toLowerCase();			//Evitem les mayuscules, pasen a minuscula
 						paraula=remove(paraula);				//Eliminem accents i caracters especials
 						//paraula repetitiva
-						suprimir=paraula.indexOf("'");
-						if(suprimir!=-1) paraula=paraula.substring(suprimir);		//Eliminem tot lo anterior a un apostrof
-						suprimir=paraula.indexOf("-");
-						if(suprimir!=-1) paraula=paraula.substring(suprimir, paraula.length());		//Eliminem tot lo posterior a un guió
+						int caca=(int) '’';
+						suprimir=paraula.indexOf("’");
+						if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior a un apostrof
+						suprimir=paraula.indexOf(".");
+						if(suprimir!=-1) paraula=paraula.substring(0, suprimir);		//Eliminem tot lo posterior a un guió
 						if((a.equals('$'))&&(eD.consultar(paraula)==null)){
 							Valors aux = new Valors(50,50);
 							eD.afegir(paraula, aux);
