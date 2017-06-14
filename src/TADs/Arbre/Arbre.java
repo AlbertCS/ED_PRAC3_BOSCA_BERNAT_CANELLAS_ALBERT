@@ -4,40 +4,6 @@ import TADs.TAD;
 
 public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 	
-	@SuppressWarnings("hiding")
-	private class NodeABC<K extends Comparable<K>, V> implements Cloneable {
-		private K k;
-		private V v;
-		private Arbre<K, V> fe;
-		private Arbre<K, V> fd;
-		
-		public NodeABC(K k, V v) {
-			this.k=k;
-			this.v=v;
-			fe=null;
-			fd=null;
-		}
-
-		@Override
-		public String toString() {
-			return "NodeABC [k=" + k + ", v=" + v + ", fe=" + fe + ", fd=" + fd + "]";
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected NodeABC<K,V> clone() {
-			NodeABC<K, V> obj=null;
-			try{
-	            obj=(NodeABC<K, V>)super.clone();
-	        }catch(CloneNotSupportedException ex){
-	            System.out.println("No es pot duplicar");
-	        }
-			return obj;
-		}
-		
-		
-	}
-	
 	private NodeABC<K, V> arrel;
 	//private int numNodes; el trec, sino cada subarbre te el seu numNodes i no s'actualitza correctament
 	// per a tenir el numNodes, els fe i fd, haurien de ser punters a NodeABC...
@@ -76,6 +42,30 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 	public K arrel() {
 		if (arrel!=null) return (arrel.k);
 		return null;
+	}
+	
+	public NodeABC<K,V> mesDret () {
+		if (arrel==null) return null;
+		else if(arrel.fd==null) return arrel;
+		else {
+			NodeABC<K,V> aux=arrel.fd.arrel;
+			while(aux.fd!=null){
+				aux=aux.fd.arrel;
+			}
+			return aux;
+		}
+	}
+	
+	public NodeABC<K,V> mesEsquerre () {
+		if (arrel==null) return null;
+		else if(arrel.fe==null) return arrel;
+		else {
+			NodeABC<K,V> aux=arrel.fe.arrel;
+			while(aux.fe!=null){
+				aux=aux.fe.arrel;
+			}
+			return aux;
+		}
 	}
 
 	@Override
