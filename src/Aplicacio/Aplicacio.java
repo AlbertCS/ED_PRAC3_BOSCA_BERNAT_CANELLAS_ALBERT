@@ -85,6 +85,56 @@ public class Aplicacio {
 	}	
 	
 	/**
+	 * Función que elimina acentos y caracteres especiales de
+	 * una cadena de texto.
+	 * @param input
+	 * @return cadena de texto limpia de acentos y caracteres especiales.
+	 */
+	public static String solsParaula(String paraula) {
+		int suprimir=-1;
+		
+		suprimir=paraula.indexOf("’");
+		if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior a un apostrof
+
+		for (int i=33; i<176; i++) {
+	        suprimir=paraula.indexOf(i);
+	        if(suprimir!=-1) paraula=paraula.substring(0, suprimir);	//Eliminem tot lo posterior al caracter
+	        suprimir=paraula.indexOf(i);
+	        if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior al caracter
+	        switch(i){
+	        	case 47:	i=57; break;
+	        	case 64:	i=90; break;
+	        	case 96:	i=122; break;
+	        	case 126:	i=165; break;
+	        	default:	break;
+	        }
+	    }
+	    return paraula;
+	}
+	
+	/**
+	 * Función que elimina acentos y caracteres especiales de
+	 * una cadena de texto.
+	 * @param input
+	 * @return cadena de texto limpia de acentos y caracteres especiales.
+	 */
+	public static String solsParaula1(String paraula) {
+		int suprimir=-1;
+		char a='a';
+		
+		suprimir=paraula.indexOf("’");
+		if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior a un apostrof
+
+		for (int i=0; i<paraula.length(); i++) {
+	        a=paraula.charAt(i);
+	        if(Character.isAlphabetic(a)){
+	        	
+	        }
+	    }
+	    return paraula;
+	}
+	
+	/**
 	 * Metode que tractara les dades amb el metode triat
 	 * @param nomFitxer	nom del fitxer d'on es llegirant les dades, amb aquest nom es creara el fitxer on guardar les dades
 	 * @param cuaClau cua que conte la clau
@@ -99,7 +149,7 @@ public class Aplicacio {
 			String frase, paraula, plana="<Plana numero";
 			Character a;
 			Integer numPlana=1;
-			int numLinies=1, suprimir=-1;
+			int numLinies=1;
 			
 			//Llegim fitxer i carreguem index en el TAD
 			frase=f.readLine();
@@ -119,11 +169,6 @@ public class Aplicacio {
 						paraula=paraula.toLowerCase();			//Evitem les mayuscules, pasen a minuscula
 						paraula=remove(paraula);				//Eliminem accents i caracters especials
 						//paraula repetitiva
-						int caca=(int) '’';
-						suprimir=paraula.indexOf("’");
-						if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior a un apostrof
-						suprimir=paraula.indexOf(".");
-						if(suprimir!=-1) paraula=paraula.substring(0, suprimir);		//Eliminem tot lo posterior a un guió
 						if((a.equals('$'))&&(eD.consultar(paraula)==null)){
 							Valors aux = new Valors(50,50);
 							eD.afegir(paraula, aux);
