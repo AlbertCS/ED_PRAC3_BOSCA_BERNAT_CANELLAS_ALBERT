@@ -1,0 +1,3 @@
+<Plana numero=1>
+Un arbre 2. és complet quan està equilibrat i totes les fulles del nivell inferior es troben a 
+la part esquerra de l’arbre.

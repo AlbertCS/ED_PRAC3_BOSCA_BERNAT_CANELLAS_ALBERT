@@ -85,50 +85,27 @@ public class Aplicacio {
 	}	
 	
 	/**
-	 * Función que elimina acentos y caracteres especiales de
-	 * una cadena de texto.
-	 * @param input
-	 * @return cadena de texto limpia de acentos y caracteres especiales.
+	 * Metode que elimina un fragment d'una paraula que no necessitem per al index
+	 * 
+	 * @param paraula
+	 * @return paraula sense la part que contenia un punt, guió, aporstrof, etc.
 	 */
 	public static String solsParaula(String paraula) {
 		int suprimir=-1;
-		
-		suprimir=paraula.indexOf("’");
-		if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior a un apostrof
-
-		for (int i=33; i<176; i++) {
-	        suprimir=paraula.indexOf(i);
-	        if(suprimir!=-1) paraula=paraula.substring(0, suprimir);	//Eliminem tot lo posterior al caracter
-	        suprimir=paraula.indexOf(i);
-	        if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior al caracter
-	        switch(i){
-	        	case 47:	i=57; break;
-	        	case 64:	i=90; break;
-	        	case 96:	i=122; break;
-	        	case 126:	i=165; break;
-	        	default:	break;
-	        }
-	    }
-	    return paraula;
-	}
-	
-	/**
-	 * Función que elimina acentos y caracteres especiales de
-	 * una cadena de texto.
-	 * @param input
-	 * @return cadena de texto limpia de acentos y caracteres especiales.
-	 */
-	public static String solsParaula1(String paraula) {
-		int suprimir=-1;
 		char a='a';
 		
-		suprimir=paraula.indexOf("’");
-		if(suprimir!=-1) paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior a un apostrof
-
 		for (int i=0; i<paraula.length(); i++) {
 	        a=paraula.charAt(i);
-	        if(Character.isAlphabetic(a)){
-	        	
+	        if(!Character.isAlphabetic(a)){
+	        	suprimir=paraula.indexOf(a);
+	        	if(suprimir!=-1){
+	        		if(suprimir>(paraula.length()/2)){
+		        		paraula=paraula.substring(0, suprimir);	//Eliminem tot lo posterior al caracter
+		        	}
+		        	else {
+		        		paraula=paraula.substring(suprimir+1);		//Eliminem tot lo anterior al caracter
+		        	}
+	        	}
 	        }
 	    }
 	    return paraula;
@@ -147,15 +124,18 @@ public class Aplicacio {
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
 			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
 			String frase, paraula, plana="<Plana numero";
-			Character a;
+			Character a='a';
 			Integer numPlana=1;
 			int numLinies=1;
 			
 			//Llegim fitxer i carreguem index en el TAD
 			frase=f.readLine();
 			while(frase!=null){ 
-				a=frase.charAt(14);
-				plana=frase.substring(0, 13);
+				if(frase.length()>14){
+					a=frase.charAt(14);
+					plana=frase.substring(0, 13);
+				} 
+				else plana=frase.substring(0, frase.length());
 				if(plana.equals("<Plana numero")){	//Nova Plana
 					numPlana=(int) (a)-48;
 					numLinies=1;
@@ -168,25 +148,28 @@ public class Aplicacio {
 						if(a.equals('$')) paraula=paraula.substring(1);			//Eliminem el caracter '$'
 						paraula=paraula.toLowerCase();			//Evitem les mayuscules, pasen a minuscula
 						paraula=remove(paraula);				//Eliminem accents i caracters especials
+						paraula=solsParaula(paraula);			//Eliminem un fragment inecessari d'una paraula
 						//paraula repetitiva
-						if((a.equals('$'))&&(eD.consultar(paraula)==null)){
-							Valors aux = new Valors(50,50);
-							eD.afegir(paraula, aux);
-							aux.novaPlana(numPlana);
-							aux.novaLinia(numLinies);
-						}
-						else{
-							Valors aux2 = eD.consultar(paraula);
-							//paraula repetitiva que ja existia
-							if(aux2!=null){
-								int ultimaPlana=aux2.getUltimaPlana();
-								int ultimaLinia=aux2.getUltimaLinia();
-								if((ultimaLinia!=numLinies)||(ultimaPlana!=numPlana)){
-									aux2.novaPlana(numPlana);
-									aux2.novaLinia(numLinies);
-								}
+						if(Character.isAlphabetic(paraula.charAt(0))){
+							if((a.equals('$'))&&(eD.consultar(paraula)==null)){
+								Valors aux = new Valors(50,50);
+								eD.afegir(paraula, aux);
+								aux.novaPlana(numPlana);
+								aux.novaLinia(numLinies);
 							}
-							//sino no la tractem perquè no és repetitiva o perque es trobarepetida en la mateixa plana i linia
+							else{
+								Valors aux2 = eD.consultar(paraula);
+								//paraula repetitiva que ja existia
+								if(aux2!=null){
+									int ultimaPlana=aux2.getUltimaPlana();
+									int ultimaLinia=aux2.getUltimaLinia();
+									if((ultimaLinia!=numLinies)||(ultimaPlana!=numPlana)){
+										aux2.novaPlana(numPlana);
+										aux2.novaLinia(numLinies);
+									}
+								}
+								//sino no la tractem perquè no és repetitiva o perque es trobarepetida en la mateixa plana i linia
+							}
 						}
 					}
 					numLinies++;
