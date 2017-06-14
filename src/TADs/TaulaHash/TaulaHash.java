@@ -61,4 +61,13 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 			else return aux.getValue();
 		}
 	}
+	
+	private int hashCode(K k){
+		String aux=(String) k;
+		int code=0;
+		for(int i=0;i<aux.length();i++){
+			
+		}
+		return code;
+	}
 }

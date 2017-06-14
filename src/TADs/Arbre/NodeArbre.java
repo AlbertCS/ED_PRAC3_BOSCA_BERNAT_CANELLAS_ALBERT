@@ -1,12 +1,12 @@
 package TADs.Arbre;
 
-public class NodeABC<K extends Comparable<K>, V> implements Cloneable {
+public class NodeArbre<K extends Comparable<K>, V> implements Cloneable {
 	protected K k;
 	protected V v;
 	protected Arbre<K, V> fe;
 	protected Arbre<K, V> fd;
 	
-	public NodeABC(K k, V v) {
+	public NodeArbre(K k, V v) {
 		this.k=k;
 		this.v=v;
 		fe=null;
@@ -20,10 +20,10 @@ public class NodeABC<K extends Comparable<K>, V> implements Cloneable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected NodeABC<K,V> clone() {
-		NodeABC<K, V> obj=null;
+	protected NodeArbre<K,V> clone() {
+		NodeArbre<K, V> obj=null;
 		try{
-            obj=(NodeABC<K, V>)super.clone();
+            obj=(NodeArbre<K, V>)super.clone();
         }catch(CloneNotSupportedException ex){
             System.out.println("No es pot duplicar");
         }

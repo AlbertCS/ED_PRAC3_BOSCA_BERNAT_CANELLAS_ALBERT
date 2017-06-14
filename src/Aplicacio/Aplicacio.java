@@ -97,7 +97,8 @@ public class Aplicacio {
 					while(st.hasMoreTokens()){
 						paraula=st.nextToken();
 						a=frase.charAt(0);
-						paraula2=paraula.substring(1);
+						paraula2=paraula.substring(1);			//Eliminem el caracter '$'
+						paraula2=paraula2.toLowerCase();		//Evitem les mayuscules pasen a minuscula
 						//paraula repetitiva
 						if((a.equals(b))&&(eD.consultar(paraula2)==null)){
 							Valors aux = new Valors(50,50);

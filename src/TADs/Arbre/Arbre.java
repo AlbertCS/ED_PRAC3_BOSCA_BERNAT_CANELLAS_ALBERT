@@ -4,7 +4,7 @@ import TADs.TAD;
 
 public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 	
-	private NodeABC<K, V> arrel;
+	private NodeArbre<K, V> arrel;
 	//private int numNodes; el trec, sino cada subarbre te el seu numNodes i no s'actualitza correctament
 	// per a tenir el numNodes, els fe i fd, haurien de ser punters a NodeABC...
 	
@@ -13,13 +13,13 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 	}
 	
 	public Arbre(K k, V v) {
-		arrel=new NodeABC<K,V>(k,v);
+		arrel=new NodeArbre<K,V>(k,v);
 	}
 	
 	@Override
 	public void afegir (K k, V v) {
 		if (esBuit()) {
-			arrel=new NodeABC<K,V>(k,v);
+			arrel=new NodeArbre<K,V>(k,v);
 		} else {
 			if (arrel.k.equals(k)) arrel.v=v;
 			else if (arrel.k.compareTo(k)>0) {
@@ -44,11 +44,11 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		return null;
 	}
 	
-	public NodeABC<K,V> mesDret () {
+	public NodeArbre<K,V> mesDret () {
 		if (arrel==null) return null;
 		else if(arrel.fd==null) return arrel;
 		else {
-			NodeABC<K,V> aux=arrel.fd.arrel;
+			NodeArbre<K,V> aux=arrel.fd.arrel;
 			while(aux.fd!=null){
 				aux=aux.fd.arrel;
 			}
@@ -56,11 +56,11 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		}
 	}
 	
-	public NodeABC<K,V> mesEsquerre () {
+	public NodeArbre<K,V> mesEsquerre () {
 		if (arrel==null) return null;
 		else if(arrel.fe==null) return arrel;
 		else {
-			NodeABC<K,V> aux=arrel.fe.arrel;
+			NodeArbre<K,V> aux=arrel.fe.arrel;
 			while(aux.fe!=null){
 				aux=aux.fe.arrel;
 			}
@@ -237,7 +237,7 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		  else {
 			  // anirem buscant l'element en alguna de les branques de l'arbre
 			  Arbre<K, V> copia;
-			  NodeABC<K, V> avantpassat=null;
+			  NodeArbre<K, V> avantpassat=null;
 			  boolean trobat=false;
 			  if (arrel.k.compareTo(k)<0) {
 				  	copia=arrel.fd;
@@ -279,7 +279,7 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		  else {
 			  // anirem buscant l'element en alguna de les branques de l'arbre
 			  Arbre<K, V> copia;
-			  NodeABC<K, V> avantpassat=null;
+			  NodeArbre<K, V> avantpassat=null;
 			  boolean trobat=false;
 			  if (arrel.k.compareTo(k)<0) {
 				  	copia=arrel.fd;
