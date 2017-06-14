@@ -73,9 +73,9 @@ public class Aplicacio {
 	 */
 	public static String remove(String input) {
 	    // Cadena de caracteres original a sustituir.
-	    String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+	    String original = "áàäéèëíìïóòöúùuñç";
 	    // Cadena de caracteres ASCII que reemplazarán los originales.
-	    String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+	    String ascii = "aaaeeeiiiooouuunc";
 	    String output = input;
 	    for (int i=0; i<original.length(); i++) {
 	        // Reemplazamos los caracteres especiales.
@@ -96,32 +96,36 @@ public class Aplicacio {
 			//Variables
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
 			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
-			String frase, paraula, paraula2, plana="<Plana numero=X>";
-			Character a, b='$';
+			String frase, paraula, plana="<Plana numero";
+			Character a;
 			Integer numPlana=1;
-			int numLinies=1;
+			int numLinies=1, suprimir=-1;
 			
 			//Llegim fitxer i carreguem index en el TAD
 			frase=f.readLine();
 			while(frase!=null){ 
 				a=frase.charAt(14);
-				plana.replace('X', a);
-				if(plana.equals(frase)){	//Nova Plana
+				plana=frase.substring(0, 13);
+				if(plana.equals("<Plana numero")){	//Nova Plana
 					numPlana=(int) (a)-48;
-					numLinies=0;
+					numLinies=1;
 				}
 				else{
 					StringTokenizer st = new StringTokenizer(frase, " ");
 					while(st.hasMoreTokens()){
 						paraula=st.nextToken();
-						a=frase.charAt(0);
-						paraula2=paraula.substring(1);			//Eliminem el caracter '$'
-						paraula2=remove(paraula2);				//Eliminem accents i caracters especials
-						paraula2=paraula2.toLowerCase();		//Evitem les mayuscules, pasen a minuscula
+						a=paraula.charAt(0);
+						if(a.equals('$')) paraula=paraula.substring(1);			//Eliminem el caracter '$'
+						paraula=paraula.toLowerCase();			//Evitem les mayuscules, pasen a minuscula
+						paraula=remove(paraula);				//Eliminem accents i caracters especials
 						//paraula repetitiva
-						if((a.equals(b))&&(eD.consultar(paraula2)==null)){
+						suprimir=paraula.indexOf("'");
+						if(suprimir!=-1) paraula=paraula.substring(suprimir);		//Eliminem tot lo anterior a un apostrof
+						suprimir=paraula.indexOf("-");
+						if(suprimir!=-1) paraula=paraula.substring(suprimir, paraula.length());		//Eliminem tot lo posterior a un guió
+						if((a.equals('$'))&&(eD.consultar(paraula)==null)){
 							Valors aux = new Valors(50,50);
-							eD.afegir(paraula2, aux);
+							eD.afegir(paraula, aux);
 							aux.novaPlana(numPlana);
 							aux.novaLinia(numLinies);
 						}
@@ -139,9 +143,9 @@ public class Aplicacio {
 							//sino no la tractem perquè no és repetitiva o perque es trobarepetida en la mateixa plana i linia
 						}
 					}
+					numLinies++;
 				}
-				frase = f.readLine();
-				numLinies++;
+				frase = f.readLine();				
 			}
 			
 			//Creem fitxer Index a partir del TAD
@@ -211,15 +215,15 @@ public class Aplicacio {
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
-		String nomFitxer;
-		int opcio;
+		String nomFitxer="Text1";
+		int opcio=1;
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
-		opcio=tipusImplementacio(teclat);
+	//	opcio=tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		nomFitxer=nomCorrecte(teclat);
+	//	nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
 		tempsi=System.nanoTime();
