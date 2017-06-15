@@ -1,5 +1,6 @@
 package TADs.Arbre;
 
+import TADs.LlistaGenericaNoOrd;
 import TADs.TAD;
 
 public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
