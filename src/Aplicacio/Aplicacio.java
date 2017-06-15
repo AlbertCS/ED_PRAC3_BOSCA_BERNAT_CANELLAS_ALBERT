@@ -269,7 +269,7 @@ public class Aplicacio {
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
-		String nomFitxer="Text2";
+		String nomFitxer="Text3";
 		int opcio=1;
 		long tempsi, tempsf;
 		
