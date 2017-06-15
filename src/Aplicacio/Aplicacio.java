@@ -196,10 +196,10 @@ public class Aplicacio {
 			//Creem fitxer Index a partir del TAD
 			//Variables
 			StringBuffer txt = new StringBuffer();
-			NodeHash<String, Valors> hashNode=null;
 			
 			switch(opcio){
 			case 1:
+				NodeHash<String, Valors> hashNode=null;
 				TaulaHash<String, Valors> hashTaula=(TaulaHash<String, Valors>) eD;
 				IteratorHash<String, Valors> iteratoHash=new IteratorHash <String, Valors>(hashTaula);
 				
@@ -248,15 +248,19 @@ public class Aplicacio {
 				}
 				break;
 			case 2:
+				NodeArbre<String, Valors> arbreNode=null;
 				Arbre<String, Valors> arbr=(Arbre<String, Valors>) eD;
 				Arbre<String, Valors> iteratoArbre=arbr.clone();
 				
-				iteratoArbre.esborrar("arbre");
-				iteratoArbre.esborrar("binari");
-				
-				int a=0;
-				
-				//eD=new Arbre<String, Valors>(); break;
+				for(int i=0;i<(arbr.numElem());i++){
+					arbreNode=iteratoArbre.mesEsquerre();
+					iteratoArbre.esborrar(arbreNode.getK());
+					txt.append(arbreNode.getK()+arbreNode.getV().toString2());
+					g.write(txt.toString());
+					g.newLine();
+					txt.delete(0, txt.length());
+				}
+				break;
 			default: 
 				break;
 			}
