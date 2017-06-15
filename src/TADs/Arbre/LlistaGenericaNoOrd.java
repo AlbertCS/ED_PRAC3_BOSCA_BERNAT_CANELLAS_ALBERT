@@ -1,4 +1,4 @@
-package TADs;
+package TADs.Arbre;
 /**
  * Llista genèrica no ordenada
  * 
@@ -7,9 +7,7 @@ package TADs;
  */
 import java.util.*;
 
-import TADs.*;
-
-public class LlistaGenericaNoOrd<T> implements Iterable<T>{
+public class LlistaGenericaNoOrd<T>{
 	private T[] llista;
 	private int num;
 	
@@ -52,11 +50,5 @@ public class LlistaGenericaNoOrd<T> implements Iterable<T>{
 	@Override
 	public String toString() {
 		return "LlistaPunts [llista=" + Arrays.toString(llista) + ", num=" + num + "]";
-	}
-	
-	@Override
-	public Iterator<T> iterator() {
-		MeuIterator<T> pI=new MeuIterator<T>(this);
-		return pI;
-	}
+	}	
 }

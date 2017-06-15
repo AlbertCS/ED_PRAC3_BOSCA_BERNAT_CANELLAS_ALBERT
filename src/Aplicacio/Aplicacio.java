@@ -182,14 +182,6 @@ public class Aplicacio {
 			//Variables crear
 			StringBuffer txt = new StringBuffer(); 
 			
-			switch(opcio){
-				case 1:
-					//TaulaHash<String, Valors> iterator=eD.; break;	//26*26
-				case 2:
-					//eD=new Arbre<String, Valors>(); break;
-				default: break;
-			}
-			
 			txt.append("asd");
 			//if(frase!=null) g.newLine();
 			//else g.write(String.valueOf('a'));
