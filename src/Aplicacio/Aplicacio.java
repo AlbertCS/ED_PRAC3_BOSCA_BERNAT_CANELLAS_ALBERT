@@ -201,10 +201,10 @@ public class Aplicacio {
 			switch(opcio){
 			case 1:
 				TaulaHash<String, Valors> hashTaula=(TaulaHash<String, Valors>) eD;
-				IteratorHash<String, Valors> iterator=new IteratorHash <String, Valors>(hashTaula);
+				IteratorHash<String, Valors> iteratoHash=new IteratorHash <String, Valors>(hashTaula);
 				
 				for(int i=0;i<(hashTaula.getCapacitat());i++){
-					hashNode=iterator.next2();
+					hashNode=iteratoHash.next2();
 					if(hashNode!=null){
 						if(hashNode.getSeguent()==null){
 							txt.append(hashNode.getKey()+hashNode.getValue().toString2());
@@ -248,8 +248,17 @@ public class Aplicacio {
 				}
 				break;
 			case 2:
+				Arbre<String, Valors> arbr=(Arbre<String, Valors>) eD;
+				Arbre<String, Valors> iteratoArbre=arbr.clone();
+				
+				iteratoArbre.esborrar("arbre");
+				iteratoArbre.esborrar("binari");
+				
+				int a=0;
+				
 				//eD=new Arbre<String, Valors>(); break;
-			default: break;
+			default: 
+				break;
 			}
 			
 			g.close();
@@ -289,7 +298,7 @@ public class Aplicacio {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
 		String nomFitxer="Text4";
-		int opcio=1;
+		int opcio=2;
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
