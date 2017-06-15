@@ -12,6 +12,12 @@ public class NodeHash<K, V> {
 		this.seguent=seguent;
 	}
 	
+	public NodeHash<K, V> clone2 (NodeHash<K, V> node){
+		NodeHash<K, V> nuevo=null;
+		if(node!=null) nuevo=new NodeHash<K, V>(node.getKey(),node.getValue(),this.clone2(node.getSeguent()));
+		return nuevo;
+	}
+	
 	public K getKey() {
 		return key;
 	}

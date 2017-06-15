@@ -181,7 +181,6 @@ public class Aplicacio {
 			//Creem fitxer Index a partir del TAD
 			//Variables
 			StringBuffer txt = new StringBuffer();
-			int i=0;
 			NodeHash<String, Valors> hashNode=null;
 			
 			switch(opcio){
@@ -189,13 +188,55 @@ public class Aplicacio {
 				TaulaHash<String, Valors> hashTaula=(TaulaHash<String, Valors>) eD;
 				IteratorHash<String, Valors> iterator=new IteratorHash <String, Valors>(hashTaula);
 				
-				for(i=0;i<(hashTaula.getCapacitat());i++){
+				for(int i=0;i<(hashTaula.getCapacitat());i++){
 					hashNode=iterator.next2();
 					if(hashNode!=null){
-						txt.append(hashNode.getKey()+hashNode.getValue().toString2());
-						g.write(txt.toString());
-						g.newLine();
-						txt.delete(0, txt.length());
+						if(hashNode.getSeguent()==null){
+							txt.append(hashNode.getKey()+hashNode.getValue().toString2());
+							g.write(txt.toString());
+							g.newLine();
+							txt.delete(0, txt.length());
+						}
+						else{
+							@SuppressWarnings("unchecked")
+							NodeHash<String, Valors>[] ordenarPosicions= new NodeHash[20];
+							NodeHash<String, Valors> guarda=null;
+							int numNodes=0;
+							int w=0;
+							String hashN, guard;
+							ordenarPosicions[0]=hashNode;
+							while(hashNode.getSeguent()!=null){
+								guarda=ordenarPosicions[w];
+								hashN=hashNode.getKey();
+								guard="zzzz";
+								if(guarda!=null) guard=guarda.getKey();
+								if(hashN.compareTo(guard)>0){
+									numNodes++;
+									for(int j=w+1;j<numNodes;j++){
+										ordenarPosicions[j+1]=ordenarPosicions[j];
+									}
+									//ordenarPosicions[i]=guarda; No es necessari, ja esta posat ahi
+									ordenarPosicions[w+1]=hashNode;
+									w=0;
+									hashNode=hashNode.getSeguent();
+								}
+								else if(hashN.compareTo(guard)<0){
+									numNodes++;
+									for(int j=w;j<numNodes;j++){
+										ordenarPosicions[j+1]=ordenarPosicions[j];
+									}
+									ordenarPosicions[w]=hashNode;
+									ordenarPosicions[w+1]=guarda;
+									w=0;
+									hashNode=hashNode.getSeguent();
+								}
+								else{
+									w++;
+								}
+							}
+							int xd=0;
+							xd=xd*10;
+						}
 					}
 				}
 				break;
@@ -241,7 +282,7 @@ public class Aplicacio {
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
-		String nomFitxer="Text1";
+		String nomFitxer="Text2";
 		int opcio=1;
 		long tempsi, tempsf;
 		

@@ -7,7 +7,7 @@ public class IteratorHash<K, V> {
 	public IteratorHash(TaulaHash<K, V> ll) {
 		llista=new TaulaHash<K, V>(ll.getCapacitat());
 		for (int i=0; i<ll.getCapacitat(); i++) {
-			if(ll.consultarIessim(i)!=null) llista.afegir(ll.consultarIessim(i).getKey(),ll.consultarIessim(i).getValue());
+			if(ll.consultarIessim(i)!=null) llista.afegir2(ll.consultarIessim(i).clone2(ll.consultarIessim(i)), i);
 		}
 		posicioIterator=0; 	// ens preparem per a retornar els elements a partir de la posicio 0
 	}
