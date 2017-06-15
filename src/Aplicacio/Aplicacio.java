@@ -201,39 +201,26 @@ public class Aplicacio {
 							@SuppressWarnings("unchecked")
 							NodeHash<String, Valors>[] ordenarPosicions= new NodeHash[20];
 							NodeHash<String, Valors> guarda=null;
-							int numNodes=0;
-							int w=0;
-							String hashN, guard;
+							int w=1;
 							ordenarPosicions[0]=hashNode;
 							while(hashNode.getSeguent()!=null){
-								guarda=ordenarPosicions[w];
-								hashN=hashNode.getKey();
-								guard="zzzz";
-								if(guarda!=null) guard=guarda.getKey();
-								if(hashN.compareTo(guard)>0){
-									numNodes++;
-									for(int j=w+1;j<numNodes;j++){
-										ordenarPosicions[j+1]=ordenarPosicions[j];
-									}
-									//ordenarPosicions[i]=guarda; No es necessari, ja esta posat ahi
-									ordenarPosicions[w+1]=hashNode;
-									w=0;
-									hashNode=hashNode.getSeguent();
-								}
-								else if(hashN.compareTo(guard)<0){
-									numNodes++;
-									for(int j=w;j<numNodes;j++){
-										ordenarPosicions[j+1]=ordenarPosicions[j];
-									}
-									ordenarPosicions[w]=hashNode;
-									ordenarPosicions[w+1]=guarda;
-									w=0;
-									hashNode=hashNode.getSeguent();
-								}
-								else{
-									w++;
-								}
+								ordenarPosicions[w]=hashNode.getSeguent();
+								w++;
+								hashNode=hashNode.getSeguent();
 							}
+							for(int z=0;z<w;z++) {
+					             for(int x=0;x<w-z;x++) {
+					                 if(ordenarPosicions[x+1]!=null){
+					                	 String pos1=ordenarPosicions[x].getKey();
+					                	 String pos2=ordenarPosicions[x+1].getKey();
+					                	 if (pos1.compareTo(pos2)>=0) {
+					                		 guarda=ordenarPosicions[x];
+					                     	ordenarPosicions[x]=ordenarPosicions[x+1];
+					                     	ordenarPosicions[x+1]=guarda;
+					                	 }
+					                 }
+					             }
+					         }
 							int xd=0;
 							xd=xd*10;
 						}
