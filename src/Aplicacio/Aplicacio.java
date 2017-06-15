@@ -221,8 +221,12 @@ public class Aplicacio {
 					                 }
 					             }
 					         }
-							int xd=0;
-							xd=xd*10;
+							for(int h=0;h<w;h++){
+								txt.append(ordenarPosicions[h].getKey()+ordenarPosicions[h].getValue().toString2());
+								g.write(txt.toString());
+								g.newLine();
+								txt.delete(0, txt.length());
+							}
 						}
 					}
 				}
@@ -269,7 +273,7 @@ public class Aplicacio {
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
-		String nomFitxer="Text3";
+		String nomFitxer="Text4";
 		int opcio=1;
 		long tempsi, tempsf;
 		
