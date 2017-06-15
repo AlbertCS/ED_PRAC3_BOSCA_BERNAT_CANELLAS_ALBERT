@@ -125,7 +125,7 @@ public class Aplicacio {
 			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
 			
 			//Llegim fitxer i carreguem index en el TAD
-			//Variables llegir
+			//Variables
 			String frase, paraula, plana="<Plana numero";
 			Character a='a';
 			Integer numPlana=1;
@@ -179,7 +179,7 @@ public class Aplicacio {
 			}
 			
 			//Creem fitxer Index a partir del TAD
-			//Variables crear
+			//Variables
 			StringBuffer txt = new StringBuffer();
 			int i=0;
 			NodeHash<String, Valors> hashNode=null;
