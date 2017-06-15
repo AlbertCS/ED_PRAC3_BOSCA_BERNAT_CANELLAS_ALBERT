@@ -65,4 +65,15 @@ public class Valors {
 	public void setNumLinies(int numLinies) {
 		this.numLinies = numLinies;
 	}
+
+	public StringBuffer toString2() {
+		StringBuffer txt = new StringBuffer();
+		int i=0;
+		
+		for(i=0;i<numLinies-1;i++){
+			txt.append(" "+planes[i]+":"+linies[i]+",");
+		}
+		txt.append(" "+planes[i]+":"+linies[i]);
+		return txt;
+	}
 }

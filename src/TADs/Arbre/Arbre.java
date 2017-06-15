@@ -169,7 +169,7 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		}
 	}
 
-	public int numNodes() {
+	public int numElem() {
 		LlistaGenericaNoOrd<K> llista=this.inordre();
 		return llista.getNum();
 	}

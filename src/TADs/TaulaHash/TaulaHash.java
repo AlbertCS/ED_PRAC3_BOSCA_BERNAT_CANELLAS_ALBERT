@@ -1,6 +1,6 @@
 package TADs.TaulaHash;
 
-import TADs.TAD;
+import TADs.*;
 
 public class TaulaHash<K, V> implements TAD<K, V> {
 
@@ -65,6 +65,11 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 	}
 	
+	public IteratorHash<K, V> iterator2() {
+		IteratorHash<K, V> pI=new IteratorHash<K, V>(this);
+		return pI;
+	}
+	
 	/**
 	 * Aquest metode es especific per a Strings en el cas de utlitzar altre tipus de formats cal utilitzar
 	 * el metode prederminat del objecte .hasCode que s'ha deixat comentat //. 
@@ -91,7 +96,7 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 	}
 	
 	public NodeHash<K, V> consultarIessim(int i) {
-		if (i<numElem) return(taulaLlistes[i]);
+		if (i<capacitat) return(taulaLlistes[i]);
 		else return(null);
 	}
 

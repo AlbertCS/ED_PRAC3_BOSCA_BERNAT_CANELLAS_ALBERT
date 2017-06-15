@@ -180,19 +180,29 @@ public class Aplicacio {
 			
 			//Creem fitxer Index a partir del TAD
 			//Variables crear
-			StringBuffer txt = new StringBuffer(); 
+			StringBuffer txt = new StringBuffer();
+			int i=0;
+			NodeHash<String, Valors> hashNode=null;
 			
 			switch(opcio){
 			case 1:
-				//TaulaHash<String, Valors> iterator=eD.; break;	//26*26
+				TaulaHash<String, Valors> hashTaula=(TaulaHash<String, Valors>) eD;
+				IteratorHash<String, Valors> iterator=new IteratorHash <String, Valors>(hashTaula);
+				
+				for(i=0;i<(hashTaula.getCapacitat());i++){
+					hashNode=iterator.next2();
+					if(hashNode!=null){
+						txt.append(hashNode.getKey()+hashNode.getValue().toString2());
+						g.write(txt.toString());
+						g.newLine();
+						txt.delete(0, txt.length());
+					}
+				}
+				break;
 			case 2:
 				//eD=new Arbre<String, Valors>(); break;
 			default: break;
 			}
-		
-			txt.append("asd");
-			//if(frase!=null) g.newLine();
-			//else g.write(String.valueOf('a'));
 			
 			g.close();
 			f.close();
@@ -224,32 +234,6 @@ public class Aplicacio {
 		return nomFitxer;
 	}
 	
-	/**
-	 * Metode que comprova que la clau sigui correcta
-	 * @param teclat variable de tipus Scanner
-	 * @return clau retorna la clau
-	 */
-	public static String clauCorrecta(Scanner teclat) {
-		int i=0;
-		String clau;
-		boolean isOk=true, nonum=true;
-		
-		System.out.println("Indica la clau:");
-		clau=teclat.nextLine();
-		while(isOk){
-			while((nonum) && (i<clau.length())){
-				if(Character.isDigit(clau.charAt(i))) i++;
-				else nonum=false;				
-			}
-			if((nonum==false) && (i>0)){
-				System.out.println("La clau que has introduit te algun caràcter incorrecte. Indica la clau:");
-				clau=teclat.nextLine();
-				isOk=true;
-			}
-			else isOk=false;
-		}
-		return clau;
-	}
 	/**
 	 * 	/-Main-/
 	 * @param args args
