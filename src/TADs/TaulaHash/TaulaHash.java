@@ -1,8 +1,5 @@
 package TADs.TaulaHash;
 
-import java.util.Iterator;
-
-import TADs.MeuIterator;
 import TADs.TAD;
 
 public class TaulaHash<K, V> implements TAD<K, V> {
@@ -66,12 +63,6 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 			if((aux.getSeguent()==null) && (!k.equals(aux.getKey()))) return null;
 			else return aux.getValue();
 		}
-	}
-	
-	@Override
-	public Iterator<T> iterator() {
-		MeuIterator<T> pI=new MeuIterator<T>(this);
-		return pI;
 	}
 	
 	/**
