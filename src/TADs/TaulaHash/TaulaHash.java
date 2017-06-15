@@ -89,4 +89,17 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		
 		return code;
 	}
+	
+	public NodeHash<K, V> consultarIessim(int i) {
+		if (i<numElem) return(taulaLlistes[i]);
+		else return(null);
+	}
+
+	public int getNumElem() {
+		return numElem;
+	}
+
+	public int getCapacitat() {
+		return capacitat;
+	}
 }

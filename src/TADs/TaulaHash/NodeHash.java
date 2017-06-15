@@ -1,6 +1,6 @@
 package TADs.TaulaHash;
 
-public class NodeHash<K , V> {
+public class NodeHash<K, V> {
 	
 	private K key;
 	private V value;
