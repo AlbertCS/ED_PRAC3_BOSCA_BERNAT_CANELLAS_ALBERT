@@ -30,7 +30,7 @@ public class Valors {
 	}
 
 	public int getUltimaLinia() {
-		if(numLinies!=0) return planes[numLinies-1];
+		if(numLinies!=0) return linies[numLinies-1];
 		else return -1;
 	}
 	

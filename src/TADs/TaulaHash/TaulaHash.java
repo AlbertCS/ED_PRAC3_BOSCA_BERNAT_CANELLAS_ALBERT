@@ -24,8 +24,8 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 		else{
 			NodeHash<K, V> aux=taulaLlistes[clauHash];
-			while((aux.getSeguent()!=null) && (aux.getKey()!=k)) aux=aux.getSeguent();
-			if((aux.getSeguent()==null) && (aux.getKey()!=k)){
+			while((aux.getSeguent()!=null) && (!k.equals(aux.getKey()))) aux=aux.getSeguent();
+			if((aux.getSeguent()==null) && (!k.equals(aux.getKey()))){
 				aux.setSeguent(new NodeHash<K, V>(k, v, null));
 				this.numElem++;
 			}
@@ -42,8 +42,8 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 		else{
 			NodeHash<K, V> aux=taulaLlistes[clauHash];
-			while((aux.getSeguent()!=null) && (aux.getKey()!=k)) aux=aux.getSeguent();
-			if((aux.getSeguent()==null) && (aux.getKey()!=k)){
+			while((aux.getSeguent()!=null) && (!k.equals(aux.getKey()))) aux=aux.getSeguent();
+			if((aux.getSeguent()==null) && (!k.equals(aux.getKey()))){
 				return null;
 			}
 			else return (aux.getValue());
@@ -59,8 +59,8 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 		else{
 			NodeHash<K, V> aux=taulaLlistes[clauHash];
-			while((aux.getSeguent()!=null) && (aux.getKey()!=k)) aux=aux.getSeguent();
-			if((aux.getSeguent()==null) && (aux.getKey()!=k)) return null;
+			while((aux.getSeguent()!=null) && (!k.equals(aux.getKey()))) aux=aux.getSeguent();
+			if((aux.getSeguent()==null) && (!k.equals(aux.getKey()))) return null;
 			else return aux.getValue();
 		}
 	}

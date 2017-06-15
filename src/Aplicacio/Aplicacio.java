@@ -57,7 +57,7 @@ public class Aplicacio {
 	public static TAD<String, Valors> implementacio(int opcio, TAD<String, Valors> eD) {
 		switch(opcio){
 			case 1:
-				eD=new TaulaHash<String, Valors>(100); break;
+				eD=new TaulaHash<String, Valors>(676); break;	//26*26
 			case 2:
 				eD=new Arbre<String, Valors>(); break;
 			default: break;
@@ -117,18 +117,19 @@ public class Aplicacio {
 	 * @param cuaClau cua que conte la clau
 	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
 	 */
-	public static void tractarDades(String nomFitxer, TAD<String, Valors> eD) {
+	public static void tractarDades(String nomFitxer, TAD<String, Valors> eD, int opcio) {
 		
 		try {
 			//Variables
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
 			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
+			
+			//Llegim fitxer i carreguem index en el TAD
+			//Variables llegir
 			String frase, paraula, plana="<Plana numero";
 			Character a='a';
 			Integer numPlana=1;
 			int numLinies=1;
-			
-			//Llegim fitxer i carreguem index en el TAD
 			frase=f.readLine();
 			while(frase!=null){ 
 				if(frase.length()>14){
@@ -178,6 +179,10 @@ public class Aplicacio {
 			}
 			
 			//Creem fitxer Index a partir del TAD
+			//Variables crear
+			StringBuffer txt = new StringBuffer(); 
+			
+			txt.append("asd");
 			//if(frase!=null) g.newLine();
 			//else g.write(String.valueOf('a'));
 			
@@ -257,7 +262,7 @@ public class Aplicacio {
 		//Operacions
 		tempsi=System.nanoTime();
 		eD=implementacio(opcio, eD);
-		tractarDades(nomFitxer, eD);
+		tractarDades(nomFitxer, eD, opcio);
 		tempsf=System.nanoTime();
 		
 		System.out.println("Les Dades s'han tractat correctament.\n");
