@@ -112,17 +112,15 @@ public class Aplicacio {
 	}
 	
 	/**
-	 * Metode que tractara les dades amb el metode triat
+	 * Metode que llegeix les dades
 	 * @param nomFitxer	nom del fitxer d'on es llegirant les dades, amb aquest nom es creara el fitxer on guardar les dades
 	 * @param cuaClau cua que conte la clau
 	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
 	 */
-	public static void tractarDades(String nomFitxer, TAD<String, Valors> eD, int opcio) {
+	public static void llegirDades(String nomFitxer, TAD<String, Valors> eD) {
 		
 		try {
-			//Variables
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
-			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
 			
 			//Llegim fitxer i carreguem index en el TAD
 			//Variables
@@ -178,6 +176,23 @@ public class Aplicacio {
 				frase = f.readLine();				
 			}
 			
+			f.close();
+		}catch (IOException e) {
+			System.err.println("Error de tipus IOException.");
+		}
+	}
+	
+	/**
+	 * Metode que guarda les dades en un fitxer Index amb el metode triat
+	 * @param nomFitxer	nom del fitxer d'on es llegirant les dades, amb aquest nom es creara el fitxer on guardar les dades
+	 * @param cuaClau cua que conte la clau
+	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
+	 */
+	public static void guardarDades(String nomFitxer, TAD<String, Valors> eD, int opcio) {
+		
+		try {
+			BufferedWriter g=new BufferedWriter(new FileWriter(nomFitxer+"_Index.txt"));
+				
 			//Creem fitxer Index a partir del TAD
 			//Variables
 			StringBuffer txt = new StringBuffer();
@@ -197,6 +212,7 @@ public class Aplicacio {
 							g.newLine();
 							txt.delete(0, txt.length());
 						}
+						//Sols entrara si hi ha diversos nodes encadenats perque no s'ha distribuit correctament la taula
 						else{
 							@SuppressWarnings("unchecked")
 							NodeHash<String, Valors>[] ordenarPosicions= new NodeHash[20];
@@ -237,7 +253,6 @@ public class Aplicacio {
 			}
 			
 			g.close();
-			f.close();
 		}catch (IOException e) {
 			System.err.println("Error de tipus IOException.");
 		}
@@ -286,10 +301,11 @@ public class Aplicacio {
 		//Operacions
 		tempsi=System.nanoTime();
 		eD=implementacio(opcio, eD);
-		tractarDades(nomFitxer, eD, opcio);
+		llegirDades(nomFitxer, eD);
+		guardarDades(nomFitxer, eD, opcio);
 		tempsf=System.nanoTime();
 		
-		System.out.println("Les Dades s'han tractat correctament.\n");
+		System.out.println("S'ha creat un fitxer Index correctament.\n");
 		System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
 		
 		teclat.close();
