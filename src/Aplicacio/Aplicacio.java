@@ -250,11 +250,13 @@ public class Aplicacio {
 				
 				for(int i=0;i<(arbr.numElem());i++){
 					arbreNode=iteratoArbre.mesEsquerre();
-					iteratoArbre.esborrar(arbreNode.getK());
-					txt.append(arbreNode.getK()+arbreNode.getV().toString2());
-					g.write(txt.toString());
-					g.newLine();
-					txt.delete(0, txt.length());
+					if(arbreNode!=null){
+						iteratoArbre.esborrar(arbreNode.getK());
+						txt.append(arbreNode.getK()+arbreNode.getV().toString2());
+						g.write(txt.toString());
+						g.newLine();
+						txt.delete(0, txt.length());
+					}
 				}
 				break;
 			default: 

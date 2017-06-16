@@ -2,11 +2,20 @@ package TADs.TaulaHash;
 
 import TADs.*;
 
+/**
+ * Classe TaulaHash
+ * @param <K>
+ * @param <V>
+ */
 public class TaulaHash<K, V> implements TAD<K, V> {
 
 	private NodeHash<K, V>[] taulaLlistes;
 	private int numElem, capacitat;
 	
+	/**
+	 * Constructor de la taula de Hash
+	 * @param capacitat capacitat de la taula de Hash
+	 */
 	@SuppressWarnings("unchecked")
 	public TaulaHash(int capacitat) {
 		taulaLlistes=new NodeHash[capacitat];
@@ -14,6 +23,12 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		this.capacitat=capacitat;
 	}
 	
+	
+	/**
+	 * Metode que afegeix un element 
+	 * @param k la clau
+	 * @param v el valor 
+	 */
 	@Override
 	public void afegir(K k, V v) {
 		//int clauHash=k.hashCode()%capacitat;
@@ -33,10 +48,20 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 	}
 	
+	/**
+	 * Metode que afegeix directement el node
+	 * @param node node a afegir
+	 * @param posicio posicio on afegir-lo
+	 */
 	protected void afegir2(NodeHash<K, V> node, int posicio) {
 		taulaLlistes[posicio]=node;
 	}
 
+	/**
+	 * Metode que esborra un element
+	 * @param k la clau del element a esborrar
+	 * @return retorna l'element eliminat
+	 */
 	@Override
 	public V esborrar(K k) {
 		//int clauHash=k.hashCode()%capacitat;
@@ -54,6 +79,11 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 	}
 
+	/**
+	 * Metode que consulta
+	 * @param k clau del element a consultar
+	 * @return retorna l'element a consultar
+	 */
 	@Override
 	public V consultar(K k) {
 		//int clauHash=k.hashCode()%capacitat;
@@ -69,14 +99,22 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 	}
 	
+	/**
+	 * Constructor del Iterator
+	 * @return pI el iterator
+	 */
 	public IteratorHash<K, V> iterator2() {
 		IteratorHash<K, V> pI=new IteratorHash<K, V>(this);
 		return pI;
 	}
 	
+	
 	/**
+	 * Metode que calcula el codi hash.
 	 * Aquest metode es especific per a Strings en el cas de utlitzar altre tipus de formats cal utilitzar
 	 * el metode prederminat del objecte .hasCode que s'ha deixat comentat //. 
+	 * @param k la clau 
+	 * @return code el codi hash
 	 */
 	private int hashCode(K k){
 		String aux=(String) k;
@@ -99,15 +137,28 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		return ((int) (Math.round(code)));
 	}
 	
+	/**
+	 * Metode que consulta una posicio
+	 * @param i posicio a consultar
+	 * @return el node de la posicio
+	 */
 	protected NodeHash<K, V> consultarIessim(int i) {
 		if (i<capacitat) return(taulaLlistes[i]);
 		else return(null);
 	}
 
+	/**
+	 * Getter del num elements
+	 * @return numElem retorna el num d'elements
+	 */
 	public int getNumElem() {
 		return numElem;
 	}
 
+	/**
+	 * Getter de la capacitat de la taula Hash
+	 * @return capacitat la capacitat de la taula
+	 */
 	public int getCapacitat() {
 		return capacitat;
 	}
