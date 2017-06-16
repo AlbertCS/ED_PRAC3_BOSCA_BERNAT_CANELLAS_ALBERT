@@ -174,22 +174,6 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		return llista.getNum();
 	}
 
-	public int alcada() {
-		if (arrel==null) return -1;
-		else {
-			int alcFE;
-			if (arrel.fe!=null) alcFE=arrel.fe.alcada();
-			else alcFE=-1;
-			int alcFD;
-			if (arrel.fd!=null) alcFD=arrel.fd.alcada();
-			else alcFD=-1;
-			int max;
-			if (alcFE>alcFD) max=alcFE;
-			else max=alcFD;
-			return max+1;
-		}
-	}
-
 	public K maxim() {
 		// tenim dos opcions per a calcular el resultat
 		// 1. ultim element del recorregut inordre - cost O(n)
@@ -226,90 +210,6 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		}
 	}
 
-	public K predecessor(K k) {
-		if (arrel==null) return null;
-		else {
-		  if (arrel.k.equals(k)) {
-			// hem trobat l'element a l'arrel de l'arbre
-			  if (arrel.fe!=null) return(arrel.fe.maxim());
-			  else return null; // si l'arrel no te fill esquerre es que no te predecessor
-		  }
-		  else {
-			  // anirem buscant l'element en alguna de les branques de l'arbre
-			  Arbre<K, V> copia;
-			  NodeArbre<K, V> avantpassat=null;
-			  boolean trobat=false;
-			  if (arrel.k.compareTo(k)<0) {
-				  	copia=arrel.fd;
-				  	avantpassat=arrel; // anem guardant l'ultim avantpassat en el qual ens hem desviat cap al subarbre dret
-			  }
-			  else {
-				  copia=arrel.fe;
-			  }
-			  while (copia!=null && !trobat) {
-				  if (copia.arrel.k.equals(k)) {
-					  // hem trobat l'element, mirem si te fill esquerre
-					  trobat=true;
-					  if (copia.arrel.fe!=null) return(copia.arrel.fe.maxim());
-					  else 
-						  if (avantpassat!=null) return(avantpassat.k);
-						  else return(null);
-				  }
-				  if (copia.arrel.k.compareTo(k)<0) {
-					  avantpassat=copia.arrel;
-					  copia=copia.arrel.fd;
-				  }
-				  else {
-					  copia=copia.arrel.fe;
-				  }
-			  }
-			  return(null);
-		  }
-		}
-	}
-
-	public K successor(K k) {
-		if (arrel==null) return null;
-		else {
-		  if (arrel.k.equals(k)) {
-			// hem trobat l'element a l'arrel de l'arbre
-			  if (arrel.fd!=null) return(arrel.fd.minim());
-			  else return null; // si l'arrel no te fill dret es que no te successor
-		  }
-		  else {
-			  // anirem buscant l'element en alguna de les branques de l'arbre
-			  Arbre<K, V> copia;
-			  NodeArbre<K, V> avantpassat=null;
-			  boolean trobat=false;
-			  if (arrel.k.compareTo(k)<0) {
-				  	copia=arrel.fd;
-			  }
-			  else {
-				  copia=arrel.fe;
-				  avantpassat=arrel; // anem guardant l'ultim avantpassat en el qual ens hem desviat cap al subarbre esquerre
-			  }
-			  while (copia!=null && !trobat) {
-				  if (copia.arrel.k.equals(k)) {
-					  // hem trobat l'element, mirem si te fill dret
-					  trobat=true;
-					  if (copia.arrel.fd!=null) return(copia.arrel.fd.minim());
-					  else 
-						  if (avantpassat!=null) return(avantpassat.k);
-						  else return(null);
-				  }
-				  if (copia.arrel.k.compareTo(k)<0)
-					  copia=copia.arrel.fd;
-				  else {
-					  avantpassat=copia.arrel;
-					  copia=copia.arrel.fe;
-				  }
-				  
-			  }
-			  return(null);
-		  }
-		}
-	}
-
 	public Arbre<K, V> fillEsq() {
 		if ((arrel!=null)&&(arrel.fe!=null)) return(arrel.fe.clone());
 		return null;
@@ -324,32 +224,12 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 		return (arrel==null);
 	}
 
-	public LlistaGenericaNoOrd<K> preordre() {
-		LlistaGenericaNoOrd<K> llista=new LlistaGenericaNoOrd<K>(10);
-		if (arrel!=null) {
-			llista.afegirElement(arrel.k);
-			if (arrel.fe!=null) llista.afegirElement(arrel.fe.preordre());
-			if (arrel.fd!=null) llista.afegirElement(arrel.fd.preordre());
-		}
-		return llista;
-	}
-
 	public LlistaGenericaNoOrd<K> inordre() {
 		LlistaGenericaNoOrd<K> llista=new LlistaGenericaNoOrd<K>(10);
 		if (arrel!=null) {
 			if (arrel.fe!=null) llista.afegirElement(arrel.fe.inordre());
 			llista.afegirElement(arrel.k);
 			if (arrel.fd!=null) llista.afegirElement(arrel.fd.inordre());
-		}
-		return llista;
-	}
-
-	public LlistaGenericaNoOrd<K> postordre() {
-		LlistaGenericaNoOrd<K> llista=new LlistaGenericaNoOrd<K>(10);
-		if (arrel!=null) {
-			if (arrel.fe!=null) llista.afegirElement(arrel.fe.postordre());
-			if (arrel.fd!=null) llista.afegirElement(arrel.fd.postordre());
-			llista.afegirElement(arrel.k);
 		}
 		return llista;
 	}
