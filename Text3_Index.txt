@@ -1,0 +1,8 @@
+lago 1:1
+lagos 1:2
+laguna 1:1
+lagunas 2:1
+lagunase 2:1
+lagunilla 1:3
+lagunota 2:1
+lagunotas 2:1
