@@ -33,7 +33,7 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		}
 	}
 	
-	public void afegir2(NodeHash<K, V> node, int posicio) {
+	protected void afegir2(NodeHash<K, V> node, int posicio) {
 		taulaLlistes[posicio]=node;
 	}
 
