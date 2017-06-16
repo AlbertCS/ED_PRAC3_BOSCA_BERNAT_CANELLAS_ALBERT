@@ -145,7 +145,7 @@ public class Aplicacio {
 						paraula=remove(paraula);				//Eliminem accents i caracters especials
 						paraula=solsParaula(paraula);			//Eliminem un fragment inecessari d'una paraula
 						//paraula repetitiva
-						if(Character.isAlphabetic(paraula.charAt(0))){
+						if(!(paraula.equals(""))&&(Character.isAlphabetic(paraula.charAt(0)))){
 							if((a.equals('$'))&&(eD.consultar(paraula)==null)){
 								Valors aux = new Valors(50,50);
 								eD.afegir(paraula, aux);
@@ -299,15 +299,15 @@ public class Aplicacio {
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
-		String nomFitxer="TextLlarg";
-		int opcio=2;
+		String nomFitxer="Text1";
+		int opcio=1;
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
-		//opcio=tipusImplementacio(teclat);
+		opcio=tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		//nomFitxer=nomCorrecte(teclat);
+		nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
 		tempsi=System.nanoTime();

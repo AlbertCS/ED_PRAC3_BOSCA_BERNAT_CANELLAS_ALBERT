@@ -1,0 +1,27 @@
+<Plana numero=1>
+Los $cuentos
+Cuando $cuentes cuentos $cuenta $cuantos cuentos $cuentas,
+porque si no cuentas cuantos cuentos cuentas,
+nunca sabrás cuantos cuentos cuentas.
+<Plana numero=2>
+Si tu gusto $gustara del gusto que $gusta mi gusto,
+mi gusto gustaría del gusto que gusta tu gusto.
+Pero como tu gusto no gusta del gusto que gusta mi gusto,
+mi gusto no gusta del gusto que gusta tu gusto.
+<Plana numero=3>
+$Lila para $Lola
+Para la Lola una lila le di a la Adela,
+mas la tomó la Dalila y yo dije:
+¡Hola, Adela! Dile a Dalila que dé la lila a la Lola
+<Plana numero=4>
+$Podadores y $podas
+Un $podador $podaba la parra y otro podador que por allí pasaba dijo:
+- Podador que podas la parra, ¿qué parra podas? ¿podas mi parra o tu parra podas?
+- Ni podo tu parra, ni mi parra podo, que podo la parra de mi tío Bartolo.
+Palabras, perdices, melones
+¿Qué hablas? Palabras.
+¿Qué dices? Perdices.
+¿Qué comes? Melones.
+Si hablas, si comes, si dices,
+tus palabras se harán melones
+y tus melones perdices.
