@@ -1,5 +1,5 @@
 <Plana numero=1>
-Un arbre $lago és complet quan està equilibrat i totes les fulles del nivell $lagunas inferior es troben a 
+Un arbre $lago és complet quan està equilibrat i totes les fulles del nivell inferior es troben a 
 la part esquerra de l’arbre. $lagos
 asd asd asd $lagunilla asd 
 <Plana numero=2>
