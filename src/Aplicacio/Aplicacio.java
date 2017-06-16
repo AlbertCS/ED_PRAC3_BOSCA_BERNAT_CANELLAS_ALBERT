@@ -250,11 +250,13 @@ public class Aplicacio {
 				
 				for(int i=0;i<(arbr.numElem());i++){
 					arbreNode=iteratoArbre.mesEsquerre();
-					iteratoArbre.esborrar(arbreNode.getK());
-					txt.append(arbreNode.getK()+arbreNode.getV().toString2());
-					g.write(txt.toString());
-					g.newLine();
-					txt.delete(0, txt.length());
+					if(arbreNode!=null){
+						iteratoArbre.esborrar(arbreNode.getK());
+						txt.append(arbreNode.getK()+arbreNode.getV().toString2());
+						g.write(txt.toString());
+						g.newLine();
+						txt.delete(0, txt.length());
+					}
 				}
 				break;
 			default: 
@@ -297,15 +299,15 @@ public class Aplicacio {
 	public static void main(String[] args) {
 		Scanner teclat=new Scanner(System.in);
 		TAD<String, Valors> eD=null;
-		String nomFitxer="Text4";
+		String nomFitxer="TextLlarg";
 		int opcio=2;
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
-	//	opcio=tipusImplementacio(teclat);
+		//opcio=tipusImplementacio(teclat);
 		
 		//Nom fitxer
-	//	nomFitxer=nomCorrecte(teclat);
+		//nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
 		tempsi=System.nanoTime();
