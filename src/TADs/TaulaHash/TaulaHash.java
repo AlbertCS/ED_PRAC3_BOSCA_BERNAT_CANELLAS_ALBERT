@@ -99,7 +99,7 @@ public class TaulaHash<K, V> implements TAD<K, V> {
 		return ((int) (Math.round(code)));
 	}
 	
-	public NodeHash<K, V> consultarIessim(int i) {
+	protected NodeHash<K, V> consultarIessim(int i) {
 		if (i<capacitat) return(taulaLlistes[i]);
 		else return(null);
 	}
