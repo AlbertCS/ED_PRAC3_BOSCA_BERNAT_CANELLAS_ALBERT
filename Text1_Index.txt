@@ -1,8 +1,0 @@
-arbre 1:1, 1:2, 2:2, 3:1, 3:3, 3:4
-binari 1:1, 1:2, 1:3, 2:1
-cerca 1:3
-complet 2:2, 3:3
-equilibrat 3:1, 3:3
-especificacions 1:2
-monticle 1:3, 2:1
-node 1:1, 2:1, 3:1
