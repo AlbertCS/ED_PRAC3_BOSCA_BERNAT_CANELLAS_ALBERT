@@ -1,5 +1,8 @@
 package TADs;
 
+/**
+ * Classe Valors
+ */
 public class Valors {
 	
 	private int[] planes;

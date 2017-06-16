@@ -2,6 +2,12 @@ package TADs.Arbre;
 
 import TADs.TAD;
 
+/**
+ * Classe arbre
+ *
+ * @param <K>
+ * @param <V>
+ */
 public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 	
 	private NodeArbre<K, V> arrel;
