@@ -18,7 +18,7 @@ import TADs.Arbre.*;
 public class Aplicacio {
 	
 	/**
-	 * Metode que mostra un menu per indicar el tipus d'implementacio.
+	 * Metode que mostra un menu per indicar l'estructura de dades escollida.
 	 * @param teclat variable de tipus Scanner
 	 * @return	opcio escollida
 	 */
@@ -48,11 +48,9 @@ public class Aplicacio {
 	
 	/**
 	 * Metode que crea el tipus de cua corresponent
-	 * @param opcio implementacio escollida
-	 * @param mida dimensio de la cua
-	 * @param cua	la cua implementada
-	 * @param clau	la clau amb la que tractar el missatge
-	 * @return retorna la cua corresponent
+	 * @param opcio estructura escollida
+	 * @param eD estructura de dades corresponent
+	 * @return retorna la ED corresponent
 	 */
 	public static TAD<String, Valors> implementacio(int opcio, TAD<String, Valors> eD) {
 		switch(opcio){
@@ -66,19 +64,19 @@ public class Aplicacio {
 	}
 	
 	/**
-	 * Función que elimina acentos y caracteres especiales de
-	 * una cadena de texto.
+	 * Funció que elimina accents y caracters especials de
+	 * una cadena de text.
 	 * @param input
-	 * @return cadena de texto limpia de acentos y caracteres especiales.
+	 * @return cadena de texto semse de accents i caracters especials.
 	 */
 	public static String remove(String input) {
 	    // Cadena de caracteres original a sustituir.
 	    String original = "áàäéèëíìïóòöúùuñç";
-	    // Cadena de caracteres ASCII que reemplazarán los originales.
+	    // Cadena de caracteres ASCII que reemplaçan els originals.
 	    String ascii = "aaaeeeiiiooouuunc";
 	    String output = input;
 	    for (int i=0; i<original.length(); i++) {
-	        // Reemplazamos los caracteres especiales.
+	        // Reemplacem els caracteres especials.
 	        output = output.replace(original.charAt(i), ascii.charAt(i));
 	    }//for i
 	    return output;
@@ -86,7 +84,6 @@ public class Aplicacio {
 	
 	/**
 	 * Metode que elimina un fragment d'una paraula que no necessitem per al index
-	 * 
 	 * @param paraula
 	 * @return paraula sense la part que contenia un punt, guió, aporstrof, etc.
 	 */
@@ -114,8 +111,7 @@ public class Aplicacio {
 	/**
 	 * Metode que llegeix les dades
 	 * @param nomFitxer	nom del fitxer d'on es llegirant les dades, amb aquest nom es creara el fitxer on guardar les dades
-	 * @param cuaClau cua que conte la clau
-	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
+	 * @param eD Estructura a omplir amb dades
 	 */
 	public static void llegirDades(String nomFitxer, TAD<String, Valors> eD) {
 		
@@ -185,8 +181,8 @@ public class Aplicacio {
 	/**
 	 * Metode que guarda les dades en un fitxer Index amb el metode triat
 	 * @param nomFitxer	nom del fitxer d'on es llegirant les dades, amb aquest nom es creara el fitxer on guardar les dades
-	 * @param cuaClau cua que conte la clau
-	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
+	 * @param eD l'estructura de dades
+	 * @param opcio estructura escollida
 	 */
 	public static void guardarDades(String nomFitxer, TAD<String, Valors> eD, int opcio) {
 		
