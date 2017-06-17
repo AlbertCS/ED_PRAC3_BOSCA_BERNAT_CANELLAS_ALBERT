@@ -123,11 +123,11 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 						//l'arrel te el fe
 						arrel=arrel.fe.arrel;
 					}
-					if ((arrel.fd!=null) && (arrel.fe==null)) {
+					else if ((arrel.fd!=null) && (arrel.fe==null)) {
 						//l'arrel te el fd
 						arrel=arrel.fd.arrel;
 					}
-					if ((arrel.fd!=null) && (arrel.fe!=null)) {
+					else if ((arrel.fd!=null) && (arrel.fe!=null)) {
 						// arrel te dos fills
 						K succKlau=arrel.fd.minim();
 						V succValor=consultar(succKlau);
@@ -153,11 +153,11 @@ public class Arbre<K extends Comparable<K>, V> implements TAD<K, V>, Cloneable {
 				if (arbre.arrel.fe!=null)
 					arbre.arrel.fe=esborrar(k, arbre.arrel.fe);
 			}
-			if (arbre.arrel.k.compareTo(k)<0) {
+			else if (arbre.arrel.k.compareTo(k)<0) {
 				if (arbre.arrel.fd!=null)
 					arbre.arrel.fd=esborrar(k, arbre.arrel.fd);
 			}
-			if (arbre.arrel.k.compareTo(k)==0) {
+			else if (arbre.arrel.k.compareTo(k)==0) {
 				if ((arbre.arrel.fe!=null) && (arbre.arrel.fd!=null)) {
 					// te dos fills
 					K succKlau=arbre.arrel.fd.minim();

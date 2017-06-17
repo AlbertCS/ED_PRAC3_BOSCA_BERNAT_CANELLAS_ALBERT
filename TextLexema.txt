@@ -4,7 +4,7 @@ Cuando $cuentes cuentos $cuenta $cuantos cuentos $cuentas,
 porque si no cuentas cuantos cuentos cuentas,
 nunca sabrás cuantos cuentos cuentas.
 <Plana numero=2>
-Si tu gusto $gustara del gusto que $gusta mi gusto,
+Si tu $gusto $gustara del gusto que $gusta mi gusto,
 mi gusto gustaría del gusto que gusta tu gusto.
 Pero como tu gusto no gusta del gusto que gusta mi gusto,
 mi gusto no gusta del gusto que gusta tu gusto.
